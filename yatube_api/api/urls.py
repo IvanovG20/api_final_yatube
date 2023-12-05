@@ -6,15 +6,15 @@ from api.views import (PostViewSet, CommentViewSet,
                        GroupViewSet, FollowViewSet)
 
 
-router = routers.DefaultRouter()
-router.register('posts', PostViewSet)
-router.register('groups', GroupViewSet)
-router.register(
+router_v1 = routers.DefaultRouter()
+router_v1.register('posts', PostViewSet)
+router_v1.register('groups', GroupViewSet)
+router_v1.register(
     'posts/(?P<post_id>\\d+)/comments', CommentViewSet, basename='comments'
 )
-router.register('follow', FollowViewSet, basename='follow')
+router_v1.register('follow', FollowViewSet, basename='follow')
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
+    path('v1/', include(router_v1.urls)),
     path('v1/', include('djoser.urls.jwt')),
 ]
